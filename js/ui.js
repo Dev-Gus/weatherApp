@@ -1,10 +1,10 @@
-const cityInput = document.getElementById('city-input');
+export const cityInput = document.getElementById('city-input');
 const statusText = document.getElementById('status');
-const weatherContainer = document.getElementById('weather-container');
 const getWeatherBtn = document.getElementById('get-weather-btn');
 const retryBtn = document.getElementById('retry-btn');
-const weatherWarning = document.getElementById('weather-warning');
 
+const weatherContainer = document.getElementById('weather-container');
+const statusArea = document.getElementById('status-area');
 const cityNameEl = document.getElementById('city-name');
 const temperatureEl = document.getElementById('temperature');
 const conditionEl = document.getElementById('condition');
@@ -14,7 +14,7 @@ const timeEl = document.getElementById('time');
 const feelsLikeEl = document.getElementById('feels-like');
 const uvIndexEl = document.getElementById('uv-index');
 const weatherIcon = document.getElementById('weather-icon');
-const statusArea = document.getElementById('status-area');
+const weatherWarning = document.getElementById('weather-warning');
 
 let lastAttemptedCity = '';
 
@@ -53,7 +53,7 @@ const ui = {
         }
     },
     updateWeather: (name, weather) => {
-        const { temperature, condition, humidity, windSpeed, time, feelsLike, uvIndex } = weather;
+        const { temperature, humidity, windSpeed, time, feelsLike, uvIndex } = weather;
 
         if (cityNameEl) cityNameEl.textContent = name;
         if (temperatureEl) temperatureEl.textContent = temperature.toFixed(1);
