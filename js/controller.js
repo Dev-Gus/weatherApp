@@ -6,6 +6,11 @@ import { getWeatherIcon, isPrecipitation } from './utils.js';
 const getWeatherBtn = document.getElementById('get-weather-btn');
 const retryBtn = document.getElementById('retry-btn');
 
+/**
+ * Get friendly error message from error object or string
+ * @param {Error|string} error - The error object or message
+ * @returns {string} - User-friendly error message
+ */
 const getErrorMsg = (error) => {
     const msg = error?.message || 'Something went wrong';
 
@@ -21,6 +26,12 @@ const getErrorMsg = (error) => {
     return errorMap[msg] || msg;
 };
 
+/**
+ * Wrap a promise with a timeout
+ * @param {Promise} promise - The promise to wrap
+ * @param {number} [timeoutMs=10000] - Timeout in milliseconds (default 10s)
+ * @returns {Promise} - The original promise or a rejected promise if timed out
+ */
 const withTimeOut = (promise, timeoutMs = 10000) => {
     const timeout = new Promise((_, reject) => {
         setTimeout(() => reject(new Error('Request timed out. Please check your connection and try again.')), timeoutMs);
@@ -29,6 +40,12 @@ const withTimeOut = (promise, timeoutMs = 10000) => {
     return Promise.race([promise, timeout]);
 };
 
+/**
+ * Fetch weather data for a city
+ * @param {string} city - The city name
+ * @returns {Promise<{name: string, latitude: number, longitude: number, weatherData: Object}>} - Weather data object
+ * @throws {Error} - If validation fails or API request fails
+ */
 const fetchWeather = async (city) => {
     try {
         if (!city) throw new Error('Input must be a city name');
@@ -51,6 +68,10 @@ const fetchWeather = async (city) => {
     }
 };
 
+/**
+ * Render weather data to the UI
+ * @param {Object} data - Weather data object containing name and weather details
+ */
 const renderWeather = (data) => {
     if (!data || !data.weather) {
         ui.setStatus({ type: 'error', message: getErrorMsg(new Error('Missing weather data')) });
@@ -71,6 +92,9 @@ const renderWeather = (data) => {
     ui.setStatus({ type: 'success' });
 };
 
+/**
+ * Handle the weather request flow: validate input, fetch data, render results
+ */
 const handleWeatherRequest = async () => {
     const cityInput = ui.getCityInput();
     if (!cityInput) {
@@ -95,6 +119,9 @@ const handleWeatherRequest = async () => {
 };
 
 
+/**
+ * Initialize the application: set up event listeners and load last city if available
+ */
 export const initApp = async () => {
     getWeatherBtn.addEventListener('click', () => handleWeatherRequest());
     retryBtn.addEventListener('click', () => {

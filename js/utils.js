@@ -1,3 +1,8 @@
+/**
+ * Format a time string into a readable time and date string
+ * @param {string} time - ISO time string
+ * @returns {string} - Formatted string (e.g. "10:30 AM - 15/05/2023")
+ */
 export const formatTime = (time) => {
     const date = new Date(time);
 
@@ -12,6 +17,11 @@ export const formatTime = (time) => {
     return `${formattedTime} - ${formattedDate}`;
 };
 
+/**
+ * Get weather emoji and description from WMO weather code
+ * @param {number} code - WMO weather code
+ * @returns {{emoji: string, description: string}} - Weather icon and description
+ */
 export const getWeatherIcon = (code) => {
     const weatherMap = {
         // Clear sky
@@ -69,6 +79,11 @@ export const getWeatherIcon = (code) => {
     return weatherMap[code] || { emoji: '🌤️', description: 'Unknown' };
 }
 
+/**
+ * Check if the weather code indicates precipitation (rain, snow, drizzle)
+ * @param {number} weatherCode - WMO weather code
+ * @returns {boolean} - True if precipitation is expected
+ */
 export const isPrecipitation = (weatherCode) => {
     const precipitationCodes = [
         51, 53, 55, 56, 57,  // Drizzle

@@ -18,10 +18,31 @@ const weatherWarning = document.getElementById('weather-warning');
 
 let lastAttemptedCity = '';
 
+/**
+ * UI Controller object for managing DOM updates
+ */
 const ui = {
+    /**
+     * Get current value from city input
+     * @returns {string} - Trimmed city name
+     */
     getCityInput: () => cityInput?.value.trim(),
+    /**
+     * Store last attempted city name
+     * @param {string} city - City name
+     */
     setLastAttemptedCity: (city) => lastAttemptedCity = city,
+    /**
+     * Get last attempted city name
+     * @returns {string} - Last city name
+     */
     getLastAttemptedCity: () => lastAttemptedCity,
+    /**
+     * Set status message and state
+     * @param {Object} status - Status object
+     * @param {'loading'|'success'|'error'} status.type - Status type
+     * @param {string} [status.message] - Error message (required for 'error' type)
+     */
     setStatus: ({ type, message }) => {
         if (!statusText) return;
         statusText.classList.remove('success', 'error', 'loading');
@@ -52,6 +73,11 @@ const ui = {
             return;
         }
     },
+    /**
+     * Update weather display with new data
+     * @param {string} name - City name
+     * @param {Object} weather - Weather data object
+     */
     updateWeather: (name, weather) => {
         const { temperature, humidity, windSpeed, time, feelsLike, uvIndex } = weather;
 
@@ -65,16 +91,32 @@ const ui = {
 
         if (weatherContainer) ui.showWeatherContainer();
     },
+    /**
+     * Show weather container
+     */
     showWeatherContainer: () => {
         if (weatherContainer) weatherContainer.classList.add('visible');
     },
+    /**
+     * Hide weather container
+     */
     hideWeatherContainer: () => {
         if (weatherContainer) weatherContainer.classList.remove('visible');
     },
+    /**
+     * Update weather icon and description element
+     * @param {string} icon - Emoji icon
+     * @param {string} description - Weather description
+     */
     updateWeatherIcon: (icon, description) => {
         if (weatherIcon) weatherIcon.textContent = icon;
         if (conditionEl) conditionEl.textContent = description;
     },
+    /**
+     * Show or hide precipitation warning
+     * @param {boolean} hasWarning - Whether to show warning
+     * @param {string} [message=''] - Warning message
+     */
     showPrecipitationWarning: (hasWarning, message = '') => {
         if (weatherWarning) {
             if (hasWarning) {
@@ -85,15 +127,27 @@ const ui = {
             }
         }
     },
+    /**
+     * Clear city input field
+     */
     clearInput: () => {
         if (cityInput) cityInput.value = '';
     },
+    /**
+     * Disable get weather button
+     */
     disableBtn: () => {
         if (getWeatherBtn) getWeatherBtn.disabled = true;
     },
+    /**
+     * Enable get weather button
+     */
     enableBtn: () => {
         if (getWeatherBtn) getWeatherBtn.disabled = false;
     },
+    /**
+     * Clear status message and states
+     */
     clearStatus: () => {
         if (!statusText) return;
         statusText.textContent = '';
