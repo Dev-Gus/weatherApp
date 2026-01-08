@@ -60,9 +60,8 @@ const fetchWeather = async (city) => {
 
         const { latitude, longitude, name } = await withTimeOut(getCoordinates(city));
 
-        const weatherData = await withTimeOut(getWeatherData(latitude, longitude));
-
-        return { name, latitude, longitude, weatherData };
+        const weather = await withTimeOut(getWeatherData(latitude, longitude));
+        return { name, latitude, longitude, weather };
     } catch (error) {
         throw error;
     }
@@ -80,10 +79,10 @@ const renderWeather = (data) => {
 
     ui.updateWeather(data.name, data.weather);
 
-    const { emoji, description } = getWeatherIcon(data.weather.weathercode);
+    const { emoji, description } = getWeatherIcon(data.weather.weatherCode);
     ui.updateWeatherIcon(emoji, description);
 
-    if (isPrecipitation(data.weather.weathercode)) {
+    if (isPrecipitation(data.weather.weatherCode)) {
         ui.showPrecipitationWarning(true, 'It may rain or snow. Please take an umbrella or jacket.');
     } else {
         ui.showPrecipitationWarning(false);
@@ -123,29 +122,32 @@ const handleWeatherRequest = async () => {
  * Initialize the application: set up event listeners and load last city if available
  */
 export const initApp = async () => {
-    getWeatherBtn.addEventListener('click', () => handleWeatherRequest());
-    retryBtn.addEventListener('click', () => {
+    getWeatherBtn?.addEventListener('click', () => handleWeatherRequest());
+    retryBtn?.addEventListener('click', () => {
         const currentInput = ui.getCityInput();
+        console.log(currentInput);
         const lastCity = ui.getLastAttemptedCity();
+        console.log(lastCity);
 
         if (currentInput && currentInput !== lastCity) {
             handleWeatherRequest();
         } else if (!currentInput && lastCity) {
             cityInput.value = lastCity;
-            handleWeatherRequest()
+            handleWeatherRequest();
         }
     });
 
-    cityInput.addEventListener('input', () => ui.setLastAttemptedCity(''));
+    cityInput?.addEventListener('input', () => ui.setLastAttemptedCity(''));
 
-    cityInput.addEventListener('keydown', (e) => {
+    cityInput?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             handleWeatherRequest();
         }
     });
 
     try {
-        const lastCityStored = ui.getLastAttemptedCity();
+        const lastCityStored = localStorage.getItem('lastCity');
+        console.log(lastCityStored);
         if (lastCityStored) {
             ui.disableBtn();
             ui.setStatus({ type: 'loading' });

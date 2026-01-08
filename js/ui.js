@@ -1,15 +1,15 @@
 export const cityInput = document.getElementById('city-input');
-const statusText = document.getElementById('status');
 const getWeatherBtn = document.getElementById('get-weather-btn');
 const retryBtn = document.getElementById('retry-btn');
 
 const weatherContainer = document.getElementById('weather-container');
 const statusArea = document.getElementById('status-area');
+const statusText = document.getElementById('status');
 const cityNameEl = document.getElementById('city-name');
 const temperatureEl = document.getElementById('temperature');
 const conditionEl = document.getElementById('condition');
 const humidityEl = document.getElementById('humidity');
-const windSpeedEl = document.getElementById('wind-speed');
+const windSpeedEl = document.getElementById('windspeed');
 const timeEl = document.getElementById('time');
 const feelsLikeEl = document.getElementById('feels-like');
 const uvIndexEl = document.getElementById('uv-index');

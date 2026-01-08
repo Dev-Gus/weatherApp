@@ -9,7 +9,7 @@ import { formatTime } from './utils.js';
  */
 export const getCoordinates = async (city) => {
     if (!navigator.onLine) {
-        throw new Error('No Internet Connection');
+        throw new Error('No internet connection');
     }
 
     try {
@@ -47,7 +47,7 @@ export const getCoordinates = async (city) => {
  */
 export const getWeatherData = async (lat, lon) => {
     if (!navigator.onLine) {
-        throw new Error('No Internet Connection');
+        throw new Error('No internet connection');
     }
 
     try {

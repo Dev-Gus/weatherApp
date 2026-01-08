@@ -74,7 +74,7 @@ export const getWeatherIcon = (code) => {
         95: { emoji: '⛈️', description: 'Thunderstorm' },
         96: { emoji: '⛈️', description: 'Thunderstorm with Hail' },
         99: { emoji: '⛈️', description: 'Thunderstorm with Heavy Hail' },
-    }
+    };
 
     return weatherMap[code] || { emoji: '🌤️', description: 'Unknown' };
 }

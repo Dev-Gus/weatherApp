@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main class="app">
+      <section class="header">
+        <h1>Weather App</h1>
+        <button
+          id="darkModeToggle"
+          class="dark-mode-toggle"
+          aria-label="Toggle dark mode"
+          title="Switch to dark mode"
+        >
+          <span class="toggle-icon">🌙</span>
+        </button>
+      </section>
+
+      <section class="actions">
+        <input type="text" id="city-input" placeholder="Enter city name" />
+        <button id="get-weather-btn" class="get-weather-btn">
+          Get Weather
+        </button>
+      </section>
+
+      <section id="status-area">
+        <svg
+          id="loader"
+          class="spinner"
+          viewBox="0 0 50 50"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="25"
+            cy="25"
+            r="20"
+            fill="none"
+            stroke="#e0e0e0"
+            stroke-width="3"
+          />
+          <circle
+            cx="25"
+            cy="25"
+            r="20"
+            fill="none"
+            stroke="#1976d2"
+            stroke-width="3"
+            stroke-dasharray="31.4 94.2"
+            stroke-linecap="round"
+          />
+        </svg>
+
+        <div id="status-content">
+          <p id="status" class="status"></p>
+          <button id="retry-btn" class="retry-btn hidden">Retry</button>
+        </div>
+      </section>
+
+      <section id="weather-container" class="weather-box visible">
+        <div class="weather-header">
+          <h2 id="city-name"></h2>
+          <span id="weather-icon"></span>
+        </div>
+
+        <div class="weather-info">
+          <p><strong>Condition:</strong> <span id="condition"></span></p>
+          <p>
+            <strong>Temperature:</strong> <span id="temperature"></span
+            ><span>°C</span>
+          </p>
+          <p>
+            <strong>Feels Like:</strong> <span id="feels-like"></span>
+            <span>°C</span>
+          </p>
+          <p>
+            <strong>Humidity:</strong> <span id="humidity"></span><span>%</span>
+          </p>
+          <p><strong>Windspeed:</strong> <span id="windspeed"></span></p>
+          <p><strong>UV Index:</strong> <span id="uv-index"></span></p>
+          <p><strong>Time:</strong> <span id="time"></span></p>
+          <div id="weatherWarning" class="weather-warning hidden"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Weather data provided by
+        <a
+          href="https://open-meteo.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Open Meteo</a
+        >
+      </p>
+
+      <p class="footer-credit">
+        Built by
+        <a
+          href="https://github.com/Dev-Gus"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Gustavo González</a
+        >
+        | January 2026
+      </p>
+    </footer>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
