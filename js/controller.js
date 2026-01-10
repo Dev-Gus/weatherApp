@@ -3,8 +3,8 @@ import { cityInput } from './ui.js';
 import { getCoordinates, getWeatherData } from './api.js';
 import { getWeatherIcon, isPrecipitation } from './utils.js';
 
-const getWeatherBtn = document.getElementById('get-weather-btn');
-const retryBtn = document.getElementById('retry-btn');
+const getWeatherBtn = document.getElementById('getWeatherBtn');
+const retryBtn = document.getElementById('retryBtn');
 
 /**
  * Get friendly error message from error object or string
@@ -125,9 +125,7 @@ export const initApp = async () => {
     getWeatherBtn?.addEventListener('click', () => handleWeatherRequest());
     retryBtn?.addEventListener('click', () => {
         const currentInput = ui.getCityInput();
-        console.log(currentInput);
         const lastCity = ui.getLastAttemptedCity();
-        console.log(lastCity);
 
         if (currentInput && currentInput !== lastCity) {
             handleWeatherRequest();
@@ -147,7 +145,6 @@ export const initApp = async () => {
 
     try {
         const lastCityStored = localStorage.getItem('lastCity');
-        console.log(lastCityStored);
         if (lastCityStored) {
             ui.disableBtn();
             ui.setStatus({ type: 'loading' });

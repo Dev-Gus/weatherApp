@@ -1,6 +1,6 @@
 export const cityInput = document.getElementById('city-input');
-const getWeatherBtn = document.getElementById('get-weather-btn');
-const retryBtn = document.getElementById('retry-btn');
+const getWeatherBtn = document.getElementById('getWeatherBtn');
+const retryBtn = document.getElementById('retryBtn');
 
 const weatherContainer = document.getElementById('weather-container');
 const statusArea = document.getElementById('status-area');
@@ -79,12 +79,13 @@ const ui = {
      * @param {Object} weather - Weather data object
      */
     updateWeather: (name, weather) => {
-        const { temperature, humidity, windSpeed, time, feelsLike, uvIndex } = weather;
+        console.log(weather);
+        const { temperature, humidity, windSpeed, formattedTime, feelsLike, uvIndex } = weather;
 
         if (cityNameEl) cityNameEl.textContent = name;
         if (temperatureEl) temperatureEl.textContent = temperature.toFixed(1);
         if (humidityEl) humidityEl.textContent = humidity;
-        if (timeEl) timeEl.textContent = time;
+        if (timeEl) timeEl.textContent = formattedTime;
         if (windSpeedEl) windSpeedEl.textContent = windSpeed.toFixed(1);
         if (feelsLikeEl) feelsLikeEl.textContent = feelsLike.toFixed(1);
         if (uvIndexEl) uvIndexEl.textContent = uvIndex.toFixed(1);
