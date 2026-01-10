@@ -2,10 +2,10 @@ export const cityInput = document.getElementById('city-input');
 const getWeatherBtn = document.getElementById('getWeatherBtn');
 const retryBtn = document.getElementById('retryBtn');
 
-const weatherContainer = document.getElementById('weather-container');
-const statusArea = document.getElementById('status-area');
+const weatherContainer = document.getElementById('weatherContainer');
+const statusArea = document.getElementById('statusArea');
 const statusText = document.getElementById('status');
-const cityNameEl = document.getElementById('city-name');
+const cityNameEl = document.getElementById('cityName');
 const temperatureEl = document.getElementById('temperature');
 const conditionEl = document.getElementById('condition');
 const humidityEl = document.getElementById('humidity');

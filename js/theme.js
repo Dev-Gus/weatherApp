@@ -7,8 +7,8 @@ const updateToggleBtn = (theme) => {
     if (toggleBtn) {
         const icon = toggleBtn.querySelector('.toggle-icon');
         if (icon) {
-            icon.textContent = theme === 'dark' ? '🌙' : '☀️';
-            toggleBtn.title = theme === 'dark' ? 'Light mode' : 'Dark mode';
+            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            toggleBtn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
         }
     }
 };
