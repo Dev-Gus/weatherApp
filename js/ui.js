@@ -15,7 +15,7 @@ const timeEl = document.getElementById("time");
 const feelsLikeEl = document.getElementById("feels-like");
 const uvIndexEl = document.getElementById("uv-index");
 const weatherIcon = document.getElementById("weather-icon");
-const weatherWarning = document.getElementById("weather-warning");
+const weatherWarning = document.getElementById("weatherWarning");
 
 let lastAttemptedCity = "";
 
@@ -54,6 +54,9 @@ const ui = {
       statusText.textContent = "";
       statusText.classList.add("visible");
       retryBtn.classList.add("hidden");
+      statusArea.setAttribute("aria-busy", "true");
+      getWeatherBtn.setAttribute("aria-busy", "true");
+      cityInput.setAttribute("aria-invalid", "false");
       ui.hideWeatherContainer();
       return;
     } else if (type === "success") {
@@ -61,12 +64,18 @@ const ui = {
       statusText.innerHTML = "";
       statusText.classList.remove("loading", "visible");
       retryBtn.classList.add("hidden");
+      statusArea.setAttribute("aria-busy", "false");
+      getWeatherBtn.setAttribute("aria-busy", "false");
+      cityInput.setAttribute("aria-invalid", "false");
       return;
     } else if (type === "error") {
       statusArea.classList.remove("loading");
       statusText.textContent = message;
       statusText.classList.add("error", "visible");
       retryBtn.classList.remove("hidden");
+      statusArea.setAttribute("aria-busy", "false");
+      getWeatherBtn.setAttribute("aria-busy", "false");
+      cityInput.setAttribute("aria-invalid", "true");
       ui.hideWeatherContainer();
       return;
     } else {

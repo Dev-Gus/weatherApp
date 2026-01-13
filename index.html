@@ -14,6 +14,8 @@
   </head>
 
   <body>
+    <a href="#city-input" class="skip-link">Skip to search</a>
+
     <main class="app">
       <section class="header">
         <h1>Weather App</h1>
@@ -27,14 +29,23 @@
       </section>
 
       <section class="actions">
-        <input type="text" id="city-input" placeholder="Enter city name..." />
+        <label class="hidden" for="city-input">City name:</label>
+        <input
+          type="text"
+          id="city-input"
+          placeholder="Enter city name..."
+          required
+          aria-required="true"
+        />
         <button id="getWeatherBtn" class="get-weather-btn">Get Weather</button>
       </section>
 
-      <section id="statusArea">
+      <section id="statusArea" aria-live="polite" aria-atomic="true">
         <svg
           id="loader"
           class="spinner"
+          role="status"
+          aria-label="Loading weather data..."
           viewBox="0 0 50 50"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -59,13 +70,17 @@
         </svg>
 
         <div id="statusContent">
-          <p id="status" class="status"></p>
+          <p id="status" class="status" role="alert"></p>
           <button id="retryBtn" class="retry-btn hidden">Retry</button>
         </div>
       </section>
 
       <div class="weather-content-wrapper">
-        <section id="weatherContainer" class="weather-box">
+        <section
+          id="weatherContainer"
+          class="weather-box"
+          aria-label="Weather information"
+        >
           <div class="weather-header">
             <h2 id="cityName"></h2>
             <span id="weather-icon"></span>
