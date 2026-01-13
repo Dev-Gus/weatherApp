@@ -89,7 +89,6 @@ const ui = {
    * @param {Object} weather - Weather data object
    */
   updateWeather: (name, weather) => {
-    console.log(weather);
     const {
       temperature,
       humidity,
