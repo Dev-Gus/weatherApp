@@ -1,5 +1,5 @@
 import ui from "./ui.js";
-import { cityInput } from "./ui.js";
+import { cityInput, clearInputBtn } from "./ui.js";
 import { getCoordinates, getWeatherData } from "./api.js";
 import { getWeatherIcon, isPrecipitation, getWeatherWarning } from "./utils.js";
 
@@ -159,12 +159,20 @@ export const initApp = async () => {
     }
   });
 
-  cityInput?.addEventListener("input", () => ui.setLastAttemptedCity(""));
+  cityInput?.addEventListener("input", () => {
+    ui.setLastAttemptedCity("");
+    ui.toggleClearBtn();
+  });
 
   cityInput?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       handleWeatherRequest();
     }
+  });
+
+  clearInputBtn?.addEventListener("click", () => {
+    ui.clearInput();
+    cityInput.focus();
   });
 
   try {

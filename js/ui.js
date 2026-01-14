@@ -1,4 +1,5 @@
 export const cityInput = document.getElementById("city-input");
+export const clearInputBtn = document.querySelector(".clear-input-btn");
 const getWeatherBtn = document.getElementById("getWeatherBtn");
 const retryBtn = document.getElementById("retryBtn");
 
@@ -153,10 +154,24 @@ const ui = {
     }
   },
   /**
-   * Clear city input field
+   * Toggle visibility of clear input button based on current input value
+   */
+  toggleClearBtn: () => {
+    if (!clearInputBtn || !cityInput) return;
+    if (cityInput.value.length > 0) {
+      clearInputBtn.classList.add("visible");
+    } else {
+      clearInputBtn.classList.remove("visible");
+    }
+  },
+  /**
+   * Clear city input field and hide the clear button
    */
   clearInput: () => {
-    if (cityInput) cityInput.value = "";
+    if (cityInput) {
+      cityInput.value = "";
+      ui.toggleClearBtn();
+    }
   },
   /**
    * Disable get weather button

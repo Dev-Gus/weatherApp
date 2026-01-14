@@ -65,13 +65,18 @@
 
       <section class="actions">
         <label class="hidden" for="city-input">City name:</label>
-        <input
-          type="text"
-          id="city-input"
-          placeholder="Enter city name..."
-          required
-          aria-required="true"
-        />
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="city-input"
+            placeholder="Enter city name..."
+            required
+            aria-required="true"
+          />
+          <button class="clear-input-btn" aria-label="Clear input">
+            &times;
+          </button>
+        </div>
         <button id="getWeatherBtn" class="get-weather-btn">Get Weather</button>
       </section>
 
