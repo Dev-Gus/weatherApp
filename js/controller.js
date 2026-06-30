@@ -59,7 +59,6 @@ const withTimeOut = (promise, timeoutMs = 10000) => {
  * @throws {Error} - If validation fails or API request fails
  */
 const fetchWeather = async (city) => {
-  try {
     if (!city) throw new Error("Input must be a city name");
 
     const MAX_CITY_LENGTH = 100;
@@ -80,9 +79,6 @@ const fetchWeather = async (city) => {
 
     const weather = await withTimeOut(getWeatherData(latitude, longitude));
     return { name, latitude, longitude, weather };
-  } catch (error) {
-    throw error;
-  }
 };
 
 /**
@@ -117,8 +113,8 @@ const renderWeather = (data) => {
  * Handle the weather request flow: validate input, fetch data, render results
  */
 const handleWeatherRequest = async () => {
-  const cityInput = ui.getCityInput();
-  if (!cityInput) {
+  const cityName = ui.getCityInput();
+  if (!cityName) {
     ui.setStatus({
       type: "error",
       message: getErrorMsg(new Error("Input must be a city name")),
@@ -131,7 +127,7 @@ const handleWeatherRequest = async () => {
   ui.setStatus({ type: "loading" });
 
   try {
-    const cityWeather = await fetchWeather(cityInput);
+    const cityWeather = await fetchWeather(cityName);
     renderWeather(cityWeather);
     localStorage.setItem("lastCity", cityWeather.name);
     ui.clearInput();
@@ -148,16 +144,21 @@ const handleWeatherRequest = async () => {
 export const initApp = async () => {
   getWeatherBtn?.addEventListener("click", () => handleWeatherRequest());
   retryBtn?.addEventListener("click", () => {
-    const currentInput = ui.getCityInput();
-    const lastCity = ui.getLastAttemptedCity();
+  const currentInput = ui.getCityInput();
+  const lastCity = ui.getLastAttemptedCity();
 
-    if (currentInput && currentInput !== lastCity) {
-      handleWeatherRequest();
-    } else if (!currentInput && lastCity) {
-      cityInput.value = lastCity;
-      handleWeatherRequest();
-    }
-  });
+  if (currentInput && currentInput !== lastCity) {
+    handleWeatherRequest();
+  } else if (!currentInput && lastCity) {
+    cityInput.value = lastCity;
+    handleWeatherRequest();
+  } else {
+    ui.setStatus({
+      type: "error",
+      message: getErrorMsg(new Error("Input must be a city name")),
+    });
+  }
+});
 
   cityInput?.addEventListener("input", () => {
     ui.setLastAttemptedCity("");

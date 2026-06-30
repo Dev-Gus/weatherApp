@@ -100,12 +100,13 @@ const ui = {
     } = weather;
 
     if (cityNameEl) cityNameEl.textContent = name;
-    if (temperatureEl) temperatureEl.textContent = temperature.toFixed(1);
     if (humidityEl) humidityEl.textContent = humidity;
     if (timeEl) timeEl.textContent = formattedTime;
-    if (windSpeedEl) windSpeedEl.textContent = windSpeed.toFixed(1);
-    if (feelsLikeEl) feelsLikeEl.textContent = feelsLike.toFixed(1);
-    if (uvIndexEl) uvIndexEl.textContent = uvIndex.toFixed(1);
+    if (temperatureEl)
+      temperatureEl.textContent = temperature?.toFixed(1) ?? "N/A";
+    if (windSpeedEl) windSpeedEl.textContent = windSpeed?.toFixed(1) ?? "N/A";
+    if (feelsLikeEl) feelsLikeEl.textContent = feelsLike?.toFixed(1) ?? "N/A";
+    if (uvIndexEl) uvIndexEl.textContent = uvIndex?.toFixed(1) ?? "N/A";
 
     if (weatherContainer) ui.showWeatherContainer();
   },

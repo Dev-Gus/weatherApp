@@ -61,7 +61,7 @@ const setTheme = (theme) => {
  * Checks localStorage or default to light theme
  */
 export const initTheme = () => {
-  const savedTheme = localStorage.getItem("theme");
+  const savedTheme = localStorage.getItem("theme") ?? "light";
   setTheme(savedTheme);
   setupToggleBtn();
 };
