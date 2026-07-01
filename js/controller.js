@@ -1,7 +1,8 @@
 import ui from "./ui.js";
 import { cityInput, clearInputBtn } from "./ui.js";
 import { getCoordinates, getWeatherData } from "./api.js";
-import { getWeatherIcon, isPrecipitation, getWeatherWarning } from "./utils.js";
+import { isPrecipitation, getWeatherWarning } from "./utils.js";
+import { getWeatherIcon } from "./icons.js";
 
 const getWeatherBtn = document.getElementById("getWeatherBtn");
 const retryBtn = document.getElementById("retryBtn");
@@ -42,10 +43,10 @@ const withTimeOut = (promise, timeoutMs = 10000) => {
       () =>
         reject(
           new Error(
-            "Request timed out. Please check your connection and try again."
-          )
+            "Request timed out. Please check your connection and try again.",
+          ),
         ),
-      timeoutMs
+      timeoutMs,
     );
   });
 
@@ -59,26 +60,23 @@ const withTimeOut = (promise, timeoutMs = 10000) => {
  * @throws {Error} - If validation fails or API request fails
  */
 const fetchWeather = async (city) => {
-    if (!city) throw new Error("Input must be a city name");
+  if (!city) throw new Error("Input must be a city name");
 
-    const MAX_CITY_LENGTH = 100;
-    if (city.length >= MAX_CITY_LENGTH)
-      throw new Error("City name is too long");
+  const MAX_CITY_LENGTH = 100;
+  if (city.length >= MAX_CITY_LENGTH) throw new Error("City name is too long");
 
-    const regex = /^[a-zA-ZÀ-ÿ\s\-']+$/;
-    if (!regex.test(city))
-      throw new Error(
-        "City can only contain letters, spaces, hyphens and apostrophes."
-      );
-
-    ui.setLastAttemptedCity(city);
-
-    const { latitude, longitude, name } = await withTimeOut(
-      getCoordinates(city)
+  const regex = /^[a-zA-ZÀ-ÿ\s\-']+$/;
+  if (!regex.test(city))
+    throw new Error(
+      "City can only contain letters, spaces, hyphens and apostrophes.",
     );
 
-    const weather = await withTimeOut(getWeatherData(latitude, longitude));
-    return { name, latitude, longitude, weather };
+  ui.setLastAttemptedCity(city);
+
+  const { latitude, longitude, name } = await withTimeOut(getCoordinates(city));
+
+  const weather = await withTimeOut(getWeatherData(latitude, longitude));
+  return { name, latitude, longitude, weather };
 };
 
 /**
@@ -96,8 +94,10 @@ const renderWeather = (data) => {
 
   ui.updateWeather(data.name, data.weather);
 
-  const { emoji, description } = getWeatherIcon(data.weather.weatherCode);
-  ui.updateWeatherIcon(emoji, description);
+  const { IconComponent, description } = getWeatherIcon(
+    data.weather.weatherCode,
+  );
+  ui.updateWeatherIcon(IconComponent, description);
 
   if (isPrecipitation(data.weather.weatherCode)) {
     const warningMsg = getWeatherWarning(data.weather.weatherCode);
@@ -144,21 +144,21 @@ const handleWeatherRequest = async () => {
 export const initApp = async () => {
   getWeatherBtn?.addEventListener("click", () => handleWeatherRequest());
   retryBtn?.addEventListener("click", () => {
-  const currentInput = ui.getCityInput();
-  const lastCity = ui.getLastAttemptedCity();
+    const currentInput = ui.getCityInput();
+    const lastCity = ui.getLastAttemptedCity();
 
-  if (currentInput && currentInput !== lastCity) {
-    handleWeatherRequest();
-  } else if (!currentInput && lastCity) {
-    cityInput.value = lastCity;
-    handleWeatherRequest();
-  } else {
-    ui.setStatus({
-      type: "error",
-      message: getErrorMsg(new Error("Input must be a city name")),
-    });
-  }
-});
+    if (currentInput && currentInput !== lastCity) {
+      handleWeatherRequest();
+    } else if (!currentInput && lastCity) {
+      cityInput.value = lastCity;
+      handleWeatherRequest();
+    } else {
+      ui.setStatus({
+        type: "error",
+        message: getErrorMsg(new Error("Input must be a city name")),
+      });
+    }
+  });
 
   cityInput?.addEventListener("input", () => {
     ui.setLastAttemptedCity("");

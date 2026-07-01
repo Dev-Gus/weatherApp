@@ -1,3 +1,6 @@
+import { createIcon } from "./icons.js";
+import { Moon, Sun } from "lucide";
+
 /**
  * Update toggle button icon and title based on theme
  * @param {string} theme - The theme to update the toggle button for (dark or light)
@@ -7,7 +10,9 @@ const updateToggleBtn = (theme) => {
   if (toggleBtn) {
     const icon = toggleBtn.querySelector(".toggle-icon");
     if (icon) {
-      icon.textContent = theme === "dark" ? "☀️" : "🌙";
+      icon.innerHTML = "";
+      const iconData = theme === "dark" ? Sun : Moon;
+      icon.appendChild(createIcon(iconData, { width: 20, height: 20 }));
       toggleBtn.title =
         theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
     }

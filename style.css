@@ -48,6 +48,9 @@
   --transition-normal: 0.4s ease;
 
   --border-color: #e0e0e0;
+
+  /* Lucide icons */
+--icon-stroke-width: 1.5;
 }
 
 :root[data-theme="dark"] {
@@ -70,6 +73,10 @@
 :root[data-theme="dark"] h1,
 :root[data-theme="dark"] .weather-box span {
   color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .weather-box #weather-icon svg {
+  stroke: var(--text-primary);
 }
 
 :root[data-theme="dark"] .toggle-btn {
@@ -210,6 +217,15 @@ input:focus {
 
 input::placeholder {
   color: var(--text-light);
+}
+
+.toggle-btn svg {
+  stroke: var(--text-primary);
+  transition: stroke var(--transition-fast);
+}
+
+.toggle-btn:hover svg {
+  stroke: var(--color-primary);
 }
 
 button:focus {
@@ -467,9 +483,16 @@ button {
 }
 
 .weather-box #weather-icon {
-  font-size: var(--font-size-lg);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: float 3s ease-in-out infinite;
+}
+
+.weather-box #weather-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--color-primary);
 }
 
 .weather-box p {
@@ -604,8 +627,9 @@ button {
 }
 
 @media (min-width: 768px) {
-  #weather-icon {
-    font-size: var(--font-size-2xl);
+  .weather-box #weather-icon svg {
+    width: 64px;
+    height: 64px;
   }
 }
 

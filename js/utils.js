@@ -18,65 +18,6 @@ export const formatTime = (time) => {
 };
 
 /**
- * Get weather emoji and description from WMO weather code
- * @param {number} code - WMO weather code
- * @returns {{emoji: string, description: string}} - Weather icon and description
- */
-export const getWeatherIcon = (code) => {
-  const weatherMap = {
-    // Clear sky
-    0: { emoji: "☀️", description: "Clear Sky" },
-    1: { emoji: "🌤️", description: "Mainly Clear" },
-    2: { emoji: "⛅", description: "Partly Cloudy" },
-    3: { emoji: "☁️", description: "Overcast" },
-
-    // Fog and mist
-    45: { emoji: "🌫️", description: "Foggy" },
-    48: { emoji: "🌫️", description: "Foggy" },
-
-    // Drizzle
-    51: { emoji: "🌧️", description: "Light Drizzle" },
-    53: { emoji: "🌧️", description: "Moderate Drizzle" },
-    55: { emoji: "🌧️", description: "Dense Drizzle" },
-
-    // Freezing drizzle
-    56: { emoji: "❄️", description: "Freezing Drizzle" },
-    57: { emoji: "❄️", description: "Freezing Drizzle" },
-
-    // Rain
-    61: { emoji: "🌧️", description: "Slight Rain" },
-    63: { emoji: "🌧️", description: "Moderate Rain" },
-    65: { emoji: "⛈️", description: "Heavy Rain" },
-
-    // Freezing rain
-    66: { emoji: "🧊", description: "Freezing Rain" },
-    67: { emoji: "🧊", description: "Heavy Freezing Rain" },
-
-    // Snow
-    71: { emoji: "❄️", description: "Slight Snow" },
-    73: { emoji: "❄️", description: "Moderate Snow" },
-    75: { emoji: "❄️", description: "Heavy Snow" },
-    77: { emoji: "❄️", description: "Snow Grains" },
-
-    // Snow showers
-    80: { emoji: "🌨️", description: "Light Showers" },
-    81: { emoji: "🌨️", description: "Moderate Showers" },
-    82: { emoji: "⛈️", description: "Heavy Showers" },
-
-    // Snow showers
-    85: { emoji: "🌨️", description: "Light Snow Showers" },
-    86: { emoji: "🌨️", description: "Heavy Snow Showers" },
-
-    // Thunderstorm
-    95: { emoji: "⛈️", description: "Thunderstorm" },
-    96: { emoji: "⛈️", description: "Light Thunderstorm with Hail" },
-    99: { emoji: "⛈️", description: "Heavy Thunderstorm with Hail" },
-  };
-
-  return weatherMap[code] || { emoji: "🌤️", description: "Unknown" };
-};
-
-/**
  * Check if the weather code indicates precipitation (rain, snow, drizzle)
  * @param {number} weatherCode - WMO weather code
  * @returns {boolean} - True if precipitation is expected

@@ -1,3 +1,5 @@
+import { createIcon } from "./icons.js";
+
 export const cityInput = document.getElementById("city-input");
 export const clearInputBtn = document.querySelector(".clear-input-btn");
 const getWeatherBtn = document.getElementById("getWeatherBtn");
@@ -135,8 +137,11 @@ const ui = {
    * @param {string} icon - Emoji icon
    * @param {string} description - Weather description
    */
-  updateWeatherIcon: (icon, description) => {
-    if (weatherIcon) weatherIcon.textContent = icon;
+  updateWeatherIcon: (iconData, description) => {
+    if (weatherIcon) {
+      weatherIcon.innerHTML = "";
+      weatherIcon.appendChild(createIcon(iconData, { width: 48, height: 48 }));
+    }
     if (conditionEl) conditionEl.textContent = description;
   },
   /**

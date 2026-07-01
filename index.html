@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -31,6 +31,14 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
+    <!-- Import map: resolves bare 'lucide' specifier for ES module imports -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lucide": "https://esm.sh/lucide@0.523.0"
+        }
+      }
+    </script>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
