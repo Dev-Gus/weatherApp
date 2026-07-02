@@ -140,7 +140,7 @@ const ui = {
   updateWeatherIcon: (iconData, description) => {
     if (weatherIcon) {
       weatherIcon.innerHTML = "";
-      weatherIcon.appendChild(createIcon(iconData, { width: 48, height: 48 }));
+      weatherIcon.appendChild(createIcon(iconData, { width: 48, height: 48, ariaLabel: description }));
     }
     if (conditionEl) conditionEl.textContent = description;
   },

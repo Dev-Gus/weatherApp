@@ -25,12 +25,11 @@ const updateToggleBtn = (theme) => {
 const setupToggleBtn = () => {
   const toggleBtn = document.querySelector(".toggle-btn");
   if (toggleBtn) {
-    toggleBtn.addEventListener("click", (e) => {
+    toggleBtn.addEventListener("click", () => {
       const currentTheme = getCurrentTheme();
       const newTheme = currentTheme === "dark" ? "light" : "dark";
       setTheme(newTheme);
-      // Remove focus after click to prevent focus ring from persisting
-      e.target.blur();
+      toggleBtn.blur();
     });
   }
 };
